@@ -2,13 +2,13 @@ from pymongo import MongoClient
 from datetime import datetime
 import os
 
-# ✅ Use MONGO_URI with TLS enabled
 mongo_uri = os.getenv("MONGO_URI")
 
-# Important: Use tls=True if it's not already in the URI
-client = MongoClient(mongo_uri, tls=True)
+# ✅ Ensure tls is enabled explicitly
+client = MongoClient(mongo_uri, tls=True, tlsAllowInvalidCertificates=True)
 
-db = client["webhookdb"]  # ✅ Use the DB name from your URI
+# ✅ Use the correct DB name from your URI (like 'webhookdb')
+db = client["webhookdb"]
 collection = db["events"]
 
 def save_event(event_type, data):
