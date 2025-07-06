@@ -6,7 +6,7 @@ services:
     startCommand: "python run.py"
     envVars:
       - key: MONGO_URI
-        value: mongodb+srv://kavinprabakaran64:WXVaxxxxQIJ5KPbe@cluster0.u3ynomd.mongodb.net/webhookdb?retryWrites=true&w=majority&tls=true
+        value: mongodb+srv://kavinprabakaran64:WXVaCOwLQIJ5KPbe@cluster0.u3ynomd.mongodb.net/webhookdb?retryWrites=true&w=majority&tls=true
     build:
       pythonVersion: 3.10.13
 
