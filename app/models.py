@@ -21,3 +21,12 @@ def save_event(event_type, data):
 
 def get_all_events():
     return list(collection.find({}, {"_id": 0}))
+
+# models.py
+def get_all_events():
+    try:
+        return list(collection.find({}, {"_id": 0}))
+    except Exception as e:
+        print("MongoDB Error:", e)
+        return []
+
