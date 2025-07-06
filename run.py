@@ -1,7 +1,10 @@
 import os
 from flask import Flask, jsonify, render_template
+from dotenv import load_dotenv
 from app.routes import routes
 from app.models import get_all_events
+
+load_dotenv()
 
 app = Flask(__name__, template_folder="templates")
 app.register_blueprint(routes)
