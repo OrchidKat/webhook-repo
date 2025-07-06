@@ -4,16 +4,7 @@ from datetime import datetime
 import os
 
 uri = os.getenv("MONGO_URI")
-
-# Ensure the client uses the latest secure API version
 client = MongoClient(uri, server_api=ServerApi('1'))
-
-# Optional: Validate connection (remove in production)
-try:
-    client.admin.command('ping')
-    print("✅ Connected to MongoDB Atlas")
-except Exception as e:
-    print("❌ MongoDB Connection Error:", e)
 
 db = client["github_events"]
 collection = db["events"]
