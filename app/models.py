@@ -1,14 +1,21 @@
-from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 from datetime import datetime
 import os
 
-mongo_uri = os.getenv("MONGO_URI")
+uri = os.getenv("MONGO_URI")
 
-# ✅ Ensure tls is enabled explicitly
-client = MongoClient(mongo_uri, tls=True, tlsAllowInvalidCertificates=True)
+# Ensure the client uses the latest secure API version
+client = MongoClient(uri, server_api=ServerApi('1'))
 
-# ✅ Use the correct DB name from your URI (like 'webhookdb')
-db = client["webhookdb"]
+# Optional: Validate connection (remove in production)
+try:
+    client.admin.command('ping')
+    print("✅ Connected to MongoDB Atlas")
+except Exception as e:
+    print("❌ MongoDB Connection Error:", e)
+
+db = client["github_events"]
 collection = db["events"]
 
 def save_event(event_type, data):
